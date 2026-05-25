@@ -89,7 +89,7 @@ INSTALLED_APPS += [
 ]
 
 AUTHENTICATION_BACKENDS = list(AUTHENTICATION_BACKENDS) + [
-    "taiga_contrib_oidc_auth.oidc.TaigaOIDCAuthenticationBackend",
+    "settings.oidc.OsolabTaigaOIDCAuthenticationBackend",
 ]
 
 ROOT_URLCONF = "settings.urls"
@@ -99,6 +99,11 @@ OIDC_CALLBACK_CLASS = (
 )
 OIDC_RP_SCOPES = os.getenv("OIDC_RP_SCOPES", "openid profile email")
 OIDC_RP_SIGN_ALGO = os.getenv("OIDC_RP_SIGN_ALGO", "RS256")
+OIDC_USE_PKCE = True
+OIDC_PKCE_CODE_CHALLENGE_METHOD = "S256"
+OIDC_OSOLAB_SKIP_ID_TOKEN_SIGNATURE = (
+    os.getenv("OIDC_OSOLAB_SKIP_ID_TOKEN_SIGNATURE", "False") == "True"
+)
 OIDC_BASE_URL = os.getenv("OIDC_BASE_URL", "http://localhost:5040")
 OIDC_OP_JWKS_ENDPOINT = os.getenv(
     "OIDC_OP_JWKS_ENDPOINT", f"{OIDC_BASE_URL}/.well-known/jwks.json"

@@ -22,7 +22,7 @@ browser / mobile / CLI / MCP client
         | Authorization Code + PKCE
         v
    Taiga client app
-   client_id: taiga-portfolio
+   client_id: 30000000000000000000000000000001
         |
         v
    Portfolio planning
@@ -32,14 +32,20 @@ browser / mobile / CLI / MCP client
 Taiga is a relying party. Osolab Auth remains the issuer and source of truth for
 identity, consent, token lifetime, and future agent delegation policy.
 
+The currently running local Auth stack uses numeric 32-character client IDs, so
+`taiga-portfolio` is the human-readable client name, not the protocol
+`client_id`.
+
 ## Local Bootstrap
 
 1. Register an OIDC client in Osolab Auth.
 
    ```text
-   client_id: taiga-portfolio
+   client_id: 30000000000000000000000000000001
+   client_name: Taiga Portfolio
    client_type: web
    redirect_uri: http://localhost:9000/oidc/callback/
+   client_secret: 3333333333333333333333333333333333333333333333333333333333333333
    scopes: openid profile email
    grant_types: authorization_code
    response_types: code
@@ -53,6 +59,11 @@ identity, consent, token lifetime, and future agent delegation policy.
    ```
 
 3. Fill in `OIDC_RP_CLIENT_ID`, `OIDC_RP_CLIENT_SECRET`, and the issuer URLs.
+
+   The current local Auth container issues RS256 ID tokens but does not expose
+   JWKS, so `.env.osolab.example` enables
+   `OIDC_OSOLAB_SKIP_ID_TOKEN_SIGNATURE=True` for local bootstrap only. Keep it
+   off for any shared or production deployment after Auth exposes JWKS.
 
 4. Start Taiga with the overlay compose file.
 
@@ -142,6 +153,8 @@ External state:
 Before moving to Cloud Run, resolve these:
 
 - OIDC issuer and redirect URIs must use the final HTTPS host.
+- Osolab Auth must expose JWKS so Taiga can verify RS256 ID tokens without the
+  local bootstrap bypass.
 - `taiga-back` must connect to external PostgreSQL and RabbitMQ.
 - uploaded media must not depend on container-local storage.
 - `taiga-events` WebSocket behavior must be checked behind Cloud Run.

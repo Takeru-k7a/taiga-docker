@@ -16,8 +16,12 @@ services:
       OIDC_RP_CLIENT_SECRET: "${OIDC_RP_CLIENT_SECRET}"
       OIDC_RP_SCOPES: "${OIDC_RP_SCOPES}"
       OIDC_RP_SIGN_ALGO: "${OIDC_RP_SIGN_ALGO}"
+      OIDC_OSOLAB_SKIP_ID_TOKEN_SIGNATURE: "${OIDC_OSOLAB_SKIP_ID_TOKEN_SIGNATURE:-False}"
+    extra_hosts:
+      - "osolab-auth-local:host-gateway"
     volumes:
       - ./osolab-auth/settings/config.py:/taiga-back/settings/config.py
+      - ./osolab-auth/settings/oidc.py:/taiga-back/settings/oidc.py
       - ./osolab-auth/settings/urls.py:/taiga-back/settings/urls.py
 
   taiga-async:
@@ -35,8 +39,12 @@ services:
       OIDC_RP_CLIENT_SECRET: "${OIDC_RP_CLIENT_SECRET}"
       OIDC_RP_SCOPES: "${OIDC_RP_SCOPES}"
       OIDC_RP_SIGN_ALGO: "${OIDC_RP_SIGN_ALGO}"
+      OIDC_OSOLAB_SKIP_ID_TOKEN_SIGNATURE: "${OIDC_OSOLAB_SKIP_ID_TOKEN_SIGNATURE:-False}"
+    extra_hosts:
+      - "osolab-auth-local:host-gateway"
     volumes:
       - ./osolab-auth/settings/config.py:/taiga-back/settings/config.py
+      - ./osolab-auth/settings/oidc.py:/taiga-back/settings/oidc.py
       - ./osolab-auth/settings/urls.py:/taiga-back/settings/urls.py
 
   taiga-front:
