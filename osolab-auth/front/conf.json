@@ -1,0 +1,9 @@
+{
+  "api": "http://localhost:9000/api/v1/",
+  "eventsUrl": "ws://localhost:9000/events",
+  "baseHref": "/",
+  "contribPlugins": ["/plugins/oidc-auth/oidc-auth.json"],
+  "oidcButtonText": "Osolab Auth",
+  "oidcButtonImage": "logo.gif",
+  "oidcMountPoint": "/oidc"
+}

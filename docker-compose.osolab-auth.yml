@@ -1,0 +1,52 @@
+version: "3.5"
+
+services:
+  taiga-back:
+    image: osolab/taiga-back-oidc:local
+    build:
+      context: ..
+      dockerfile: taiga-docker/osolab-auth/taiga-back.Dockerfile
+    environment:
+      OIDC_BASE_URL: "${OIDC_BASE_URL}"
+      OIDC_OP_JWKS_ENDPOINT: "${OIDC_OP_JWKS_ENDPOINT}"
+      OIDC_OP_AUTHORIZATION_ENDPOINT: "${OIDC_OP_AUTHORIZATION_ENDPOINT}"
+      OIDC_OP_TOKEN_ENDPOINT: "${OIDC_OP_TOKEN_ENDPOINT}"
+      OIDC_OP_USER_ENDPOINT: "${OIDC_OP_USER_ENDPOINT}"
+      OIDC_RP_CLIENT_ID: "${OIDC_RP_CLIENT_ID}"
+      OIDC_RP_CLIENT_SECRET: "${OIDC_RP_CLIENT_SECRET}"
+      OIDC_RP_SCOPES: "${OIDC_RP_SCOPES}"
+      OIDC_RP_SIGN_ALGO: "${OIDC_RP_SIGN_ALGO}"
+    volumes:
+      - ./osolab-auth/settings/config.py:/taiga-back/settings/config.py
+      - ./osolab-auth/settings/urls.py:/taiga-back/settings/urls.py
+
+  taiga-async:
+    image: osolab/taiga-back-oidc:local
+    build:
+      context: ..
+      dockerfile: taiga-docker/osolab-auth/taiga-back.Dockerfile
+    environment:
+      OIDC_BASE_URL: "${OIDC_BASE_URL}"
+      OIDC_OP_JWKS_ENDPOINT: "${OIDC_OP_JWKS_ENDPOINT}"
+      OIDC_OP_AUTHORIZATION_ENDPOINT: "${OIDC_OP_AUTHORIZATION_ENDPOINT}"
+      OIDC_OP_TOKEN_ENDPOINT: "${OIDC_OP_TOKEN_ENDPOINT}"
+      OIDC_OP_USER_ENDPOINT: "${OIDC_OP_USER_ENDPOINT}"
+      OIDC_RP_CLIENT_ID: "${OIDC_RP_CLIENT_ID}"
+      OIDC_RP_CLIENT_SECRET: "${OIDC_RP_CLIENT_SECRET}"
+      OIDC_RP_SCOPES: "${OIDC_RP_SCOPES}"
+      OIDC_RP_SIGN_ALGO: "${OIDC_RP_SIGN_ALGO}"
+    volumes:
+      - ./osolab-auth/settings/config.py:/taiga-back/settings/config.py
+      - ./osolab-auth/settings/urls.py:/taiga-back/settings/urls.py
+
+  taiga-front:
+    image: osolab/taiga-front-oidc:local
+    build:
+      context: ..
+      dockerfile: taiga-docker/osolab-auth/taiga-front.Dockerfile
+    volumes:
+      - ./osolab-auth/front/conf.json:/usr/share/nginx/html/conf.json:ro
+
+  taiga-gateway:
+    volumes:
+      - ./osolab-auth/gateway/taiga.conf:/etc/nginx/conf.d/default.conf
