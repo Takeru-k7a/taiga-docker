@@ -1,6 +1,6 @@
 {
-  "api": "https://ready-florist-concerning-mins.trycloudflare.com/api/v1/",
-  "eventsUrl": "wss://ready-florist-concerning-mins.trycloudflare.com/events",
+  "api": "https://taiga.osolab.jp/api/v1/",
+  "eventsUrl": "wss://taiga.osolab.jp/events",
   "baseHref": "/",
   "contribPlugins": ["/plugins/oidc-auth/oidc-auth.json"],
   "oidcButtonText": "Osolab Auth",
