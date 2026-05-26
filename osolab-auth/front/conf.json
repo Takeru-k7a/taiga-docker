@@ -1,6 +1,6 @@
 {
-  "api": "https://home.tail8478bf.ts.net/api/v1/",
-  "eventsUrl": "wss://home.tail8478bf.ts.net/events",
+  "api": "https://ready-florist-concerning-mins.trycloudflare.com/api/v1/",
+  "eventsUrl": "wss://ready-florist-concerning-mins.trycloudflare.com/events",
   "baseHref": "/",
   "contribPlugins": ["/plugins/oidc-auth/oidc-auth.json"],
   "oidcButtonText": "Osolab Auth",
