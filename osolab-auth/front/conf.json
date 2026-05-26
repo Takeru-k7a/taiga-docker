@@ -1,6 +1,6 @@
 {
-  "api": "http://localhost:9000/api/v1/",
-  "eventsUrl": "ws://localhost:9000/events",
+  "api": "https://home.tail8478bf.ts.net/api/v1/",
+  "eventsUrl": "wss://home.tail8478bf.ts.net/events",
   "baseHref": "/",
   "contribPlugins": ["/plugins/oidc-auth/oidc-auth.json"],
   "oidcButtonText": "Osolab Auth",
