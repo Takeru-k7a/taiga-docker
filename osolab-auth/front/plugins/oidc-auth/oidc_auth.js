@@ -130,7 +130,7 @@
             ? $params.next
             : $navUrls.resolve("home");
         var baseUrl = $config.get("api", "/api/v1/").split("/").slice(0, -3).join("/");
-        var url = joinUrl(baseUrl, $config.get("oidcMountPoint", "/oidc"), "authenticate/");
+        var url = joinUrl(baseUrl, $config.get("oidcMountPoint", "/oidc"), "authenticate") + "/";
 
         $window.location.href = url + "?next=" + encodeURIComponent(nextUrl);
       });
